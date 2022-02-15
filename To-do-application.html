@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>jQuery To-Do Application</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+<main>
+   <div class="container">
+    <div  id ="myDIV" class="page-header"> 
+      <h1>jQuery To-Do Application</h1>   
+    <form>
+      <input class="form-control" type="text" id="item"  placeholder="Add an item...">
+      <button class = "addlist" type = "button" id="todo">Add</button>
+    </form>
+    </div>
+      <ul id="todoapp">
+      </ul>
+    </div>
+</main>
+  <script>
+
+     $(document).ready(function() {
+
+       $('#todo').on('click', todo);
+       $('#todoapp').on('change', 'completeItem',completeItem);
+       $('#todoapp').on('click','.deleteItem', deleteItem);
+       
+      function todo() {
+        var newTodoText = $('#item').val();
+        $('#todoapp').append('<li><input class = "completeItem"  type = "checkbox">' + newTodoText + '<span class = "fa fa-trash deleteItem"></span></li>');
+        $('#item').val(""); 
+      }
+      
+      function deleteItem() {
+        $(this).parent().remove();
+        event.stopPropagation();
+      }
+
+      function completeItem(){
+        $(this).parent().toggleClass('done');
+      }
+
+      
+      $('ul').on('click', 'li', function() {
+        $(this).toggleClass('done');
+      })
+     });
+     
+  </script>
+</body>
+</html>
